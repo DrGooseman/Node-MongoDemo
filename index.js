@@ -26,4 +26,35 @@ async function createCourse()
 	console.log(result);
 }
 
-createCourse();
+async function getCourses()
+{
+	const courses = await Course.find({ author: "Mosh", isPublished: true })
+		.limit(10)
+		.sort({ name: 1 })
+		.select({ name: 1, tags: 1});
+	console.log(courses);
+}
+
+async function getNumOfCourses()
+{
+	const courses = await Course.find({ author: "Mosh", isPublished: true })
+		.limit(10)
+		.sort({ name: 1 })
+		.count();
+	console.log(courses);
+}
+
+async function updateCourse(id){
+	const course = await Course.findById(id);
+	if(!course) return;
+
+	course.isPublished = true;
+	course.author = "Another Author";
+
+	const result = await course.save();
+	console.log(result);
+}
+
+//getCourses();
+//getNumOfCourses();
+updateCourse("5e07c6414cac015f80b8d599");
