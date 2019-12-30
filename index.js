@@ -55,6 +55,23 @@ async function updateCourse(id){
 	console.log(result);
 }
 
+async function updateCourse2(id){
+	const result = await Course.update({_id: id}, {
+		$set: {
+			author: "Mosh",
+			isPublished: false
+		}
+	});
+	
+	console.log(result);
+}
+
+async function removeCourse(id){
+	const result = await Course.deleteOne({ _id: id });
+	// const course = await Course.findByIdAndRemove(id);
+	console.log(result);
+}
+
 //getCourses();
 //getNumOfCourses();
-updateCourse("5e07c6414cac015f80b8d599");
+removeCourse("5e07c6414cac015f80b8d599");
